@@ -1,0 +1,4 @@
+<?php
+$vcBaseUrlAssets = (!empty($vcBaseUrlAssets))?$vcBaseUrlAssets: config_item('ext_base_url_assets');
+?>
+<nav><ul id="topnav"><li class="itemSup"><a href="inicio" class="nav-button" style="text-transform: uppercase;" >Inicio</a></li><li class="itemSup"><a href="administrator/personas/" class="nav-button" style="text-transform: uppercase;" >Personas</a></li><li class="itemSup"><a href="administrator/clientes" class="nav-button" style="text-transform: uppercase;" ><i class="icon-user icon-white"></i>&nbsp;&nbsp;Clientes</a></li><li class="itemSup"><a href="administrator/productos" class="nav-button" style="text-transform: uppercase;" >Productos</a></li><li class="itemSup"><a href="administrator/pedidos" class="nav-button" style="text-transform: uppercase;" >Pedidos</a></li></ul></nav><div class="clearfloat">&nbsp;</div>

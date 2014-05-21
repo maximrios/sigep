@@ -1,0 +1,147 @@
+/* *
+* Mensajes de notificación
+* */
+.notif-container-alert{
+width: 100%;
+background: #FFF4CC;
+border: 1px solid #F8E3AC;
+border-radius: 0.1em;
+-webkit-border-radius: 0.1em;
+-moz-border-radius: 0.1em;
+-o-border-radius: 0.1em;
+-ms-border-radius: 0.1em;
+behavior: url(../otros/PIE.htc);
+margin: 0 0 5px 0;
+padding: 0.1em 0 1em 0;
+}
+.notif-container-alert .notif-lft{
+float: left;
+padding: 7px 0 7px 10px;
+width: 85%;
+color: #FF6600;
+}
+.notif-container-alert .notif-lft a {
+color: #FF6600;
+font-family: Tahoma;
+font-weight: normal;
+text-decoration: underline;
+
+}
+.notif-container-alert .icon-notif{
+float: right;
+background: transparent url(../img/icon_close_yellow.gif) 0 0 no-repeat;
+display: inline-block;
+width: 23px;
+height: 23px;
+margin: 7px 5px 5px 5px;
+padding: 0;
+cursor: pointer;
+}
+
+.notif-container-info{
+width: 100%;
+background: #E4EDF5;
+border: 1px solid #D8E1E9;
+border-radius: 0.1em;
+-webkit-border-radius: 0.1em;
+-moz-border-radius: 0.1em;
+-o-border-radius: 0.1em;
+-ms-border-radius: 0.1em;
+behavior: url(../otros/PIE.htc);
+margin: 0 0 5px 0;
+}
+.notif-container-info .notif-lft{
+float: left;
+padding: 7px 0 7px 10px;
+width: 85%;
+color: #2e74b2;
+}
+.notif-container-info .notif-lft a {
+color: #2e74b2;
+font-family: Tahoma;
+font-weight: normal;
+text-decoration: underline;
+}
+.notif-container-info .icon-notif{
+float: right;
+background: transparent url(../img/icon_close_blue.gif) 0 0 no-repeat;
+display: inline-block;
+width: 23px;
+height: 23px;
+margin: 7px 5px 5px 5px;
+padding: 0;
+cursor: pointer;
+}
+
+.notif-container-success{
+width: 100%;
+background: #E0F2CB;
+border: 1px solid #CCEBAC;
+border-radius: 0.1em;
+-webkit-border-radius: 0.1em;
+-moz-border-radius: 0.1em;
+-o-border-radius: 0.1em;
+-ms-border-radius: 0.1em;
+behavior: url(../otros/PIE.htc);
+margin: 0 0 5px 0;
+}
+.notif-container-success .notif-lft{
+float: left;
+padding: 7px 0 7px 10px;
+width: 85%;
+color: #6da827;
+}
+.notif-container-success .notif-lft a {
+color: #6da827;
+font-family: Tahoma;
+font-weight: normal;
+text-decoration: underline;
+}
+.notif-container-success .icon-notif{
+float: right;
+background: transparent url(../img/icon_close_green.gif) 0 0 no-repeat;
+display: inline-block;
+width: 23px;
+height: 23px;
+margin: 7px 5px 5px 5px;
+padding: 0;
+cursor: pointer;
+}
+
+.notif-container-error{
+width: 100%;
+background: #FBD3B1;
+border: 1px solid #F5C69A;
+border-radius: 0.1em;
+-webkit-border-radius: 0.1em;
+-moz-border-radius: 0.1em;
+-o-border-radius: 0.1em;
+-ms-border-radius: 0.1em;
+behavior: url(../otros/PIE.htc);
+margin: 0 0 5px 0;
+}
+.notif-container-error .notif-lft{
+float: left;
+padding: 7px 0 7px 10px;
+width: 85%;
+color: #ce2700;
+}
+.notif-container-error .notif-lft a {
+color: #ce2700;
+font-family: Tahoma;
+font-weight: normal;
+text-decoration: underline;
+}
+.notif-container-error .icon-notif{
+float: right;
+background: transparent url(../img/icon_close_red.gif) 0 0 no-repeat;
+display: inline-block;
+width: 23px;
+height: 23px;
+margin: 7px 5px 5px 5px;
+padding: 0;
+cursor: pointer;
+}
+/* *
+* Fin Mensajes de notificación
+* */
