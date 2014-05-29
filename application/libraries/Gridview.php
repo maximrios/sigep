@@ -503,7 +503,7 @@ th
         if($this->_aTemplates['listElement']=='table'){
             if($this->buscador) {
                 //$buscador = '<tr><th colspan="'.count($this->aCols).'"><div class="pull-right"><form id="frmBuscador" name="frmBuscador" action="administrator/agentes/listado" method="post" target="contenido-abm">Buscar&nbsp;&nbsp;<input id="txtvcBuscar" name="txtvcBuscar" type="text"/></form></div></th></tr>';
-                $buscador = '<tr><th colspan="'.count($this->aCols).'"><div class="pull-right"><div class="input-group"><span class="glyphicon glyphicon-search input-group-addon" style="padding:0em 1em;margin:0;"></span><input type="text" class="form-control" placeholder="Buscar..." style="padding:0 0.5em;"></div></div></th></tr>';
+                $buscador = '<tr><th colspan="'.count($this->aCols).'"><form action="administrator/cuadrocargosagentes"><div class="pull-right"><div class="input-group"><span class="glyphicon glyphicon-search input-group-addon" style="padding:0em 1em;margin:0;"></span><input type="text" class="form-control" placeholder="Buscar..." style="padding:0 0.5em;"></div></div></form></th></tr>';
             }
         	$sXHtml = '<thead><tr><th colspan="'.count($this->aCols).'" class="hilite">'.$this->titulo.'</th></tr>'.$buscador.'<tr>'.$sXHtml.'</tr></thead>';
 

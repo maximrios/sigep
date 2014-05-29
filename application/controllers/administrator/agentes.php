@@ -4,6 +4,7 @@ class Agentes extends Ext_crud_Controller {
         parent::__construct();
         $this->load->model('hits/personas_model', 'personas');
         $this->load->model('sigep/agentes_model', 'agente');
+        $this->load->model('sigep/cuadrocargosagentes_model', 'cuadrocargosagentes');
         $this->load->model('sigep/cargos_model', 'cargo');
         $this->load->model('sigep/layout_model', 'layout');
         $this->load->model('sigep/estructuras_model', 'estructura');
@@ -29,32 +30,32 @@ class Agentes extends Ext_crud_Controller {
             )
             ,array(
                 'field' => 'apellidoPersona',
-                'label' => 'Apellido de la persona',
+                'label' => 'Apellido',
                 'rules' => 'trim|required|xss_clean|min_length[3]'
             )   
             ,array(
                 'field' => 'nombrePersona',
-                'label' => 'Nombre de la persona',
+                'label' => 'Nombre',
                 'rules' => 'trim|required|xss_clean|min_length[3]'
             )  
             ,array(
                 'field' => 'cuilPersona',
-                'label' => 'Numero de Cuil de la Persona',
+                'label' => 'Numero de Cuil',
                 'rules' => 'trim|required|xss_clean|max_length[11]|min_length[11]'
             ) 
             ,array(
                 'field' => 'nacimientoPersona',
-                'label' => 'Fecha de nacimiento de la Persona',
+                'label' => 'Fecha de nacimiento',
                 'rules' => 'trim|required|xss_clean'
             )
             ,array(
                 'field' => 'idEcivil',
-                'label' => 'Estado civil de la Persona',
+                'label' => 'Estado civil',
                 'rules' => 'trim|xss_clean|required'
             ) 
             ,array(
                 'field' => 'idSexo',
-                'label' => 'Sexo de la Persona',
+                'label' => 'Sexo',
                 'rules' => 'trim|xss_clean|required'
             ) 
             ,array(
@@ -137,6 +138,7 @@ class Agentes extends Ext_crud_Controller {
         $id = ($this->input->post('idAgente')!==false)? $this->input->post('idAgente'):0;
         if($id!=0 && !$boIsPostBack) {
             $this->_reg = $this->agente->obtenerUno($id);
+            $this->_reg['nacimientoPersona'] = GetDateFromISO($this->_reg['nacimientoPersona'], FALSE);
             $this->_reg['ingresoAgenteAPP'] = GetDateFromISO($this->_reg['ingresoAgenteAPP'], FALSE);
             $this->_reg['ingresoAgenteSIGEP'] = GetDateFromISO($this->_reg['ingresoAgenteSIGEP'], FALSE);
         } 
@@ -237,10 +239,11 @@ class Agentes extends Ext_crud_Controller {
         $this->gridview->addParm('idCargo', $this->input->post('idCargo'));
         $ver = '<a href="administrator/reportes/especial/{idAgente}" target="_blank" title="Imprimir reporte de licencia especial {nombrePersona}" class="icono-usuario" rel="{\'idAgente\': {idAgente}}">&nbsp;</a>'; 
         $editar = '<a href="administrator/agentes/formulario/{idAgente}" title="Editar {nombreCompletoPersona}" class="btn-accion" rel="{\'idAgente\': {idAgente}}"><span class="glyphicon glyphicon-pencil"></span></a>';
+        $planilla = '<a href="administrator/agentes/plantilla/{idAgente}" title="Editar {nombreCompletoPersona}" target="_blank" class="" rel="{\'idAgente\': {idAgente}}"><span class="glyphicon glyphicon-print"></span></a>';
         //$mensaje = '<a href="administrator/mensajes/formularioUno/{idAgente}" title="Enviar un mensaje a {apellidoPersona} {nombrePersona}" class="icono-llevar mensaje-nuevo" rel="{\'idAgente\': {idAgente}}">&nbsp;</a>';
         if($this->lib_autenticacion->idRol() == 1) {
             $tamano = 64;
-            $acciones = $ver.$editar;
+            $acciones = $planilla.$editar;
         }
         elseif($this->lib_autenticacion->idRol() == 3) {
             $tamano = 64;
@@ -351,6 +354,23 @@ class Agentes extends Ext_crud_Controller {
         $this->_rsRegs = $this->agente->obtener('', $this->input->post('idEstructura'), $this->input->post('idCargo'), 0, 999);
         print_r($this->_rsRegs);
         //$this->export->to_excel($this->_rsRegs, 'nameForFile1'); 
+    }
+    function planilla() {
+        $this->config->set_item('page_orientation', 'L');
+        $this->config->set_item('page_format', 'A4');
+        $this->config->set_item('header_on', FALSE);
+        $aData['agentes'] = $this->agente->obtener('');
+        $this->load->view('administrator/sigep/agentes/plantilla', $aData);
+    }
+    function plantilla($idAgente) {
+        $this->config->set_item('page_orientation', 'L');
+        $this->config->set_item('page_format', 'A4');
+        $this->config->set_item('header_on', FALSE);
+        $aData['agentes'][] = $this->agente->obtenerUno($idAgente);
+        if($aData['agentes']) {
+            //$aData['cuadrocargosagentes'] = $this->cuadrocargosagentes->obtenerCuadroCargoAgente($idAgente);
+        }
+        $this->load->view('administrator/sigep/agentes/plantilla', $aData);
     }
 }
 

@@ -37,7 +37,8 @@ class Aut extends Ext_Controller {
 			$val = $this->form_validation;
 			$val->set_rules('nombreUsuario', 'Usuario', 'trim|required|max_length[50]|xss_clean');
 			$val->set_rules('passwordUsuario', 'Password', 'trim|required|xss_clean');
-			if ($val->run() AND $this->lib_autenticacion->login($this->input->post('nombreUsuario'), $this->input->post('passwordUsuario'))) {
+			//if ($val->run() AND $this->lib_autenticacion->login($this->input->post('nombreUsuario'), $this->input->post('passwordUsuario'))) {
+			if ($this->lib_autenticacion->login($this->input->post('nombreUsuario'), $this->input->post('passwordUsuario'))) {
 			    antibotBorrarLlaves();
                 $vcResponse = $this->lib_autenticacion->doRedirect($this->lib_autenticacion->opciones['login_success_uri']);
             }

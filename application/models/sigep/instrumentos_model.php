@@ -143,6 +143,18 @@ class Instrumentos_model extends CI_Model {
             $resultSimple = $query->result();
         }
         return $resultSimple;
+    }*/
+    public function dropdownInstrumentos() {
+        $sql = 'SELECT *, YEAR(i.fechaInstrumentoLegal) as anio
+            FROM sigep_instrumentoslegales_tipos ti
+            INNER JOIN sigep_instrumentoslegales i ON ti.idInstrumentoLegalTipo = i.idTipoInstrumento
+            ORDER BY fechaInstrumentoLegal DESC';
+        $query = $this->db->query($sql)->result();
+        $subgrupos[0] = 'Seleccione un instrumento ...';
+        foreach($query as $row) {
+            $subgrupos[$row->idInstrumentoLegal] = $row->nombreInstrumentoLegalTipo.' N° '.$row->numeroInstrumentoLegal.'/'.$row->anio; 
+        }
+        return $subgrupos;
     }
     public function obtenerInstrumentosAutocomplete($vcBuscar) {
         $sql = 'SELECT *
@@ -162,7 +174,7 @@ class Instrumentos_model extends CI_Model {
     }
 
 
-    function obtenerInstrumentos($tipo) {
+    /*function obtenerInstrumentos($tipo) {
         $sql = 'SELECT * FROM sigep_view_instrumentoslegales WHERE idTipoInstrumento = '.$tipo;
         $query = $this->db->query($sql);
         return $query->result_array();

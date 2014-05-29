@@ -21,6 +21,16 @@ class Pases extends Ext_crud_controller {
                 'label' => 'Pase',
                 'rules' => 'trim|xss_clean'
             ),
+            array(
+                'field' => 'idDestino',
+                'label' => 'Destino',
+                'rules' => 'trim|xss_clean|required'
+            ),
+            array(
+                'field' => 'observacionActuacionPase',
+                'label' => 'Observaciones',
+                'rules' => 'trim|xss_clean'
+            ),
         );
     }
     public function index() {
@@ -42,11 +52,12 @@ class Pases extends Ext_crud_controller {
             , 'idPaseEstado' => null
             , 'idUsuario' => $this->lib_autenticacion->idUsuario()
         );
-        $inId = ($this->input->post('idNoticia') !== false) ? $this->input->post('idNoticia') : 0;
+        $inId = ($this->input->post('idActuacionPase') !== false) ? $this->input->post('idActuacionPase') : 0;
+        $idActuacion = ($this->input->post('idActuacion') !== false) ? $this->input->post('idActuacion') : 0;
         if ($inId != 0 && !$boIsPostBack) {
-            $this->_reg = $this->noticia->obtenerUno($inId);
-            $this->_reg['inicioNoticia'] = GetDateFromISO($this->_reg['inicioNoticia'], FALSE);
-            $this->_reg['vencimientoNoticia'] = GetDateFromISO($this->_reg['vencimientoNoticia'], FALSE);
+            $this->_reg = $this->pases->obtenerUno($inId);
+            //$this->_reg['inicioNoticia'] = GetDateFromISO($this->_reg['inicioNoticia'], FALSE);
+            //$this->_reg['vencimientoNoticia'] = GetDateFromISO($this->_reg['vencimientoNoticia'], FALSE);
         } 
         else {
             $this->_reg = array(
@@ -55,13 +66,13 @@ class Pases extends Ext_crud_controller {
                 , 'numeroActuacionPase' => $this->input->post('numeroActuacionPase')
                 , 'fechaEnvioActuacionPase' => ($this->input->post('fechaEnvioActuacionPase') === FALSE) ? GetToday('d/m/Y') : set_value('fechaEnvioActuacionPase')
                 , 'fechaRecepcionActuacionPase' => ($this->input->post('fechaRecepcionActuacionPase') === FALSE) ? GetToday('d/m/Y') : set_value('fechaRecepcionActuacionPase')
-                , 'idEstructuraOrigen' => $this->input->post('idEstructuraOrigen')
+                , 'idOrigen' => set_value('idOrigen')
                 , 'nombreOrigen' => $this->lib_ubicacion->nombreEstructura()
-                , 'idEstructuraDestino' => $this->input->post('idEstructuraDestino')
+                , 'idDestino' => $this->input->post('idEstructuraDestino')
                 , 'nombreDestino' => $this->input->post('nombreDestino')
                 , 'observacionActuacionPase' => $this->input->post('observacionActuacionPase')
                 , 'idPaseEstado' => $this->input->post('idPaseEstado')
-                , 'idUsuario' => $this->lib_autenticacion->idUsuario()
+                , 'idUsuarioOrigen' => $this->lib_autenticacion->idUsuario()
             );
         }
         return $this->_reg;
@@ -112,7 +123,7 @@ class Pases extends Ext_crud_controller {
     }
     public function formulario($idActuacion) {
         $aData['Reg'] = $this->_inicReg($this->input->post('vcForm'));
-        $aData['mesas'] = $this->pases->dropdownEstructurasMesas($this->lib_ubicacion->idEstructura());
+        $aData['mesas'] = ($this->_reg['idActuacionPase'] > 0) ? $this->pases->dropdownEstructurasMesas($this->lib_ubicacion->idEstructura()) : $this->pases->dropdownEstructuras();
         $aData['actuacion'] = $this->actuaciones->obtenerUno($idActuacion);
         $aData['vcFrmAction'] = 'administrator/pases/guardar';
         $aData['vcMsjSrv'] = $this->_aEstadoOper['message'];
@@ -170,13 +181,11 @@ class Pases extends Ext_crud_controller {
         }
 
         $this->_aEstadoOper['message'] = $this->messages->do_message(array('message' => $this->_aEstadoOper['message'], 'type' => ($this->_aEstadoOper['status'] > 0) ? 'success' : 'alert'));
-
         if ($this->_aEstadoOper['status'] > 0) {
-            echo '<script>delete CKEDITOR.instances["descripcionNoticia"]</script>';
             $this->listado();
-        } else {
-            
-            $this->formulario();
+        } 
+        else {
+            $this->formulario($this->input->post('idActuacion'));
             
         }
     }

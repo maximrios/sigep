@@ -35,7 +35,7 @@ class Cuadrocargos_model extends CI_Model {
     }
 
     public function guardar($aParms) {
-        $sql = 'SELECT sigep_sp_cuadrocargos_guardar(?, ?, ?, ?, ?, ?, ?, ?) AS result;';
+        $sql = 'SELECT sigep_sp_cuadrocargos_guardar(?, ?, ?, ?, ?, ?, ?, ?, ?) AS result;';
         $result = $this->db->query($sql, $aParms)->result_array();
         return $result[0]['result'];
     }

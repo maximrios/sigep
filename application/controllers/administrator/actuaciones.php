@@ -19,6 +19,7 @@ class Actuaciones extends Ext_crud_controller {
     function __construct() {
         parent::__construct();
         $this->load->model('sigep/actuaciones_model', 'actuaciones');
+        $this->load->model('sigep/pases_model', 'pases');
         $this->load->model('sigep/instrumentos_model', 'instrumentos');
         $this->load->library('gridview');
         $this->load->library('Messages');
@@ -160,7 +161,7 @@ class Actuaciones extends Ext_crud_controller {
         $this->gridview->addColumn('nombreActuacionEstado', 'Estado', 'text', array('order' => TRUE));
         $this->gridview->addParm('vcBuscar', $this->input->post('vcBuscar'));
         $pases = '<a href="administrator/pases/listado/{idActuacion}" title="Ver detalle de pases de Actuación N° {codigoActuacion}" class="btn-accion" rel="{\'idActuacion\': {idActuacion}}"><span class="glyphicon glyphicon-th-list"></span></a>';
-        $print = '<a href="administrator/usuarios/formulario/{idActuacion}" title="Imprimir Actuación N° {codigoActuacion}" class="btn-accion" rel="{\'idActuacion\': {idActuacion}}"><span class="glyphicon glyphicon-print"></span></a>';
+        $print = '<a href="administrator/actuaciones/historial/{idActuacion}" target="_blank" title="Imprimir Actuación N° {codigoActuacion}" class="" rel="{\'idActuacion\': {idActuacion}}"><span class="glyphicon glyphicon-print"></span></a>';
         $eliminar = '<a href="administrator/usuarios/formulario/{idActuacion}" title="Eliminar actuacion N° {codigoActuacion}" class="btn-accion" rel="{\'idActuacion\': {idActuacion}}"><span class="glyphicon glyphicon-trash"></span></a>';
         $editar = '<a href="administrator/actuaciones/formulario/{idActuacion}" title="Editar Actuación N° {codigoActuacion}" class="btn-accion" rel="{\'idActuacion\': {idActuacion}}"><span class="glyphicon glyphicon-pencil"></span></a>';
         $acciones = $editar.$eliminar.$pases.$print;
@@ -268,6 +269,13 @@ class Actuaciones extends Ext_crud_controller {
         $this->_aEstadoOper['message'] = $this->messages->do_message(array('message' => $this->_aEstadoOper['message'], 'type' => ($this->_aEstadoOper['status'] > 0) ? 'success' : 'alert'));
 
         $this->listado();
+    }
+    public function historial($idActuacion) {
+        $this->config->set_item('page_orientation', 'P');
+        $this->config->set_item('page_format', 'A4');
+        $aData['actuacion'] = $this->actuaciones->obtenerUno($idActuacion);
+        $aData['pases'] = $this->pases->obtener($idActuacion);
+        $this->load->view('administrator/sigep/actuaciones/historial', $aData);
     }
     public function nuevo() {
         $aData['ckeditor_texto'] = $this->capa;

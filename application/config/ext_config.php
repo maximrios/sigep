@@ -226,6 +226,7 @@ $config['css_array_admin'] = array(
 // Array de JS
 $config['js_array'] = array(
     'assets/themes/base/js/jquery.js',
+
     'assets/themes/base/js/jquery.scrollUp.min.js',
     'assets/themes/base/js/bootstrap.js',
     'assets/themes/base/js/jquery.placeholder.min.js',

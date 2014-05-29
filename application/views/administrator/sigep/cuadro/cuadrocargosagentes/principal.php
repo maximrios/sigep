@@ -1,26 +1,22 @@
 <?php
 /**
- * @author Duran Francisco Javier
+ * @author Maximiliano Ezequiel Rios
  * @version 1.0.0
- * @copyright 2011-12
+ * @copyright 2014
  * @package base
  */
-	$vcMsjSrv = (!empty($vcMsjSrv))? $vcMsjSrv: ''; 
+$vcMsjSrv = (!empty($vcMsjSrv))? $vcMsjSrv: ''; 
 ?>
-	<div class="full-content">
-		<div class="box-normal-100">
-	  		<h2 class="fontface-arimo-titulo">Administraci&oacute;n del Cuadro de Cargos</h2>
-	  		<p>En esta secci&oacute;n podr&aacute; administrar el cuadro de cargos.</p>
-		</div> 
-		<section class="box-normal-100">
-	  		<?= $vcMsjSrv; ?>
-	  		<div id="contenido-abm" class="container-gridview"></div>
-		</section>
+<div class="panel panel-default">
+	<div class="panel-heading">Administracion de Cargos<a data-toggle="collapse" href="#prueba"><span class="glyphicon glyphicon-minus pull-right"></span></a></div>
+		<div class="panel-body panel-collapse">
+			<?= $vcMsjSrv; ?>
+ 			<div id="contenido-abm" class="container-gridview"></div>
+		</div>
 	</div>
-	<div class="clearfloat">&nbsp;</div>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$('#contenido-abm').gridviewHandler({'url': 'cuadro/cuadrocargosagentes/listado'});
-		});
-	</script>
-<!-- principal-personas.php -->
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#contenido-abm').gridviewHandler({'url': 'administrator/cuadrocargosagentes/listado'});
+	});
+</script>

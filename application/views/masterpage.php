@@ -85,6 +85,8 @@ $vcMainContent = (!empty($vcMainContent))? $vcMainContent: '';
             <ul class="sidebar-nav" id="sidebar">     
                 <li><a href="administrator/agentes">Agentes<span class="sub_icon glyphicon glyphicon-home"></span></a></li>
                 <li><a href="administrator/actuaciones">Actuaciones<span class="sub_icon glyphicon glyphicon-home"></span></a></li>
+                <li><a href="administrator/cuadrocargos">Estructura<span class="sub_icon glyphicon glyphicon-home"></span></a></li>
+                <li><a href="administrator/cuadrocargosagentes">Cargos<span class="sub_icon glyphicon glyphicon-home"></span></a></li>
                 <li><a href="administrator/usuarios">Usuarios<span class="sub_icon glyphicon glyphicon-home"></span></a></li>
                 <li><a href="aut/logout">Cerrar Sesión<span class="sub_icon glyphicon glyphicon-off"></span></a></li>
             </ul>

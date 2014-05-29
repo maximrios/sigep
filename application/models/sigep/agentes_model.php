@@ -22,7 +22,7 @@ class Agentes_model extends CI_Model {
         $estructura = $this->estructura->obtenerUno($area);
         $sql = 'SELECT *
             FROM sigep_view_agentes
-            WHERE busqueda LIKE ? AND leftArea >= '.$estructura['leftEstructura'].' AND rightArea <= '.$estructura['rightEstructura'].' '.$cargos.'
+            WHERE busqueda LIKE ? AND leftArea >= '.$estructura['leftEstructura'].' AND rightArea <= '.$estructura['rightEstructura'].' '.$cargos.' AND vigenteCuadroCargoAgente = 1
             ORDER BY leftArea ASC  
             limit ? offset ? ;';
         return $this->db->query($sql, array('%' . strtolower((string) $vcBuscar) . '%', (double) $offset, (double) $limit))->result_array();
@@ -32,7 +32,7 @@ class Agentes_model extends CI_Model {
         ($area == 0)? $area=1:$area=$area;
         ($cargo == 0)? $cargos = '':$cargos = 'AND idCargo = '.$cargo.' ';
         $estructura = $this->estructura->obtenerUno($area);
-        $sql = 'SELECT count(idAgente) AS inCant FROM sigep_view_agentes WHERE lower(busqueda) LIKE ?;';
+        $sql = 'SELECT count(idAgente) AS inCant FROM sigep_view_agentes WHERE lower(busqueda) LIKE ? AND vigenteCuadroCargoAgente = 1;';
         $result = $this->db->query($sql, array(strtolower('%' . strtolower($vcBuscar) . '%')))->result_array();
         return $result[0]['inCant'];
     }
@@ -53,7 +53,8 @@ class Agentes_model extends CI_Model {
     }
 
     public function guardar($aParms) {
-        $sql = 'SELECT sigep_sp_agentes_guardar(?, ?, ?, ?, ?) AS result;';
+        //$sql = 'SELECT sigep_sp_agentes_guardar(?, ?, ?, ?, ?) AS result;';
+        $sql = 'SELECT sigep_sp_agentes_guardar2(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) AS result;';
         $result = $this->db->query($sql, $aParms)->result_array();
         return $result[0]['result'];
     }
@@ -89,6 +90,28 @@ class Agentes_model extends CI_Model {
             }
             echo json_encode($row_set);
         }
+    }
+
+    public function dropdownAgentes() {
+        $sql = 'SELECT * FROM sigep_agentes a
+        INNER JOIN hits_personas p on p.idPersona = a.idPersona
+        ORDER BY apellidoPersona';
+        $query = $this->db->query($sql)->result();
+        $subgrupos[0] = 'Seleccione un agente ...';
+        foreach($query as $row) {
+            $subgrupos[$row->idAgente] = $row->apellidoPersona.', '.$row->nombrePersona; 
+        }
+        return $subgrupos;
+    }
+
+    public function dropdownSituacionesRevistas() {
+        $sql = 'SELECT * FROM sigep_situacionesrevistas';
+        $query = $this->db->query($sql)->result();
+        $funciones[0] = 'Seleccione un item...';
+        foreach($query as $row) {
+            $funciones[$row->idSituacionRevista] = $row->nombreSituacionRevista; 
+        }
+        return $funciones;
     }
 }
 

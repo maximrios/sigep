@@ -109,6 +109,17 @@ class Pases_model extends CI_Model {
         }
         return $subgrupos;
     }
+    public function dropdownEstructuras() {
+        $sql = 'SELECT e.idEstructura, e.nombreEstructura, e.iudEstructura, e.mesaEstructura 
+        FROM sigep_estructuras e
+        ORDER BY nombreEstructura ASC';
+        $query = $this->db->query($sql)->result();
+        $subgrupos[0] = 'Seleccione un destino ...';
+        foreach($query as $row) {
+            $subgrupos[$row->idEstructura] = '('.$row->iudEstructura.') - '.$row->nombreEstructura; 
+        }
+        return $subgrupos;    
+    }
     public function guardar($aParms) {
         $sql = 'SELECT sigep_sp_actuaciones_pases_guardar(?, ?, ?, ?, ?, ?, ?) AS result;';
         $result = $this->db->query($sql, $aParms)->result_array();

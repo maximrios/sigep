@@ -27,9 +27,8 @@
 			<input type="text" id="nombreOrigen" name="nombreOrigen" tabindex="1" class="form-control" placeholder="Nombre del Area de Origen." value="<?=$Reg['nombreOrigen']?>" readonly>
     	</div>
         <div class="form-group col-lg-12">
-            <label for="nombreDestino">Destino</label>
-            <?=form_dropdown('idDestino', $mesas, $Reg['idEstructuraDestino'], 'tabindex="2" class="form-control"');?>
-            
+            <label for="idDestino">Destino</label>
+            <?=form_dropdown('idDestino', $mesas, $Reg['idDestino'], 'tabindex="2" class="form-control"');?>
         </div>
         <div class="form-group col-lg-1">
             <label for="foliosActuacionPase">Folios</label>
@@ -42,8 +41,8 @@
         <div class="col-lg-12">
             <input id="btnnuevo" type="submit" class="btn btn-primary btn-accion pull-right" value="Guardar"/>    
         </div>
-		<input type="hidden" id="idActuacion" name="idActuacion" value="">
-        <input type="hidden" id="idEstructuraOrigen" name="idOrigen" value="<?=$Reg['idEstructuraOrigen']?>">
-        <input type="hidden" id="idUsuario" name="idUsuario" value="<?=$Reg['idUsuario']?>">
+		<input type="hidden" id="idActuacion" name="idActuacion" value="<?=$actuacion['idActuacion']?>">
+        <input type="hidden" id="idOrigen" name="idOrigen" value="<?=$Reg['idOrigen']?>">
+        <input type="hidden" id="idUsuario" name="idUsuario" value="<?=$Reg['idUsuarioOrigen']?>">
 		<input type="hidden" id="vcForm" name="vcForm" value="<?= $vcFormName; ?>" />
     </form>

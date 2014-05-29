@@ -32,15 +32,19 @@ class Cuadrocargosagentes_model extends CI_Model {
     public function obtenerUno($id) {
         $sql = 'SELECT * FROM sigep_view_cuadrocargosagentes WHERE idCuadroCargo = ?;';
         return array_shift($this->db->query($sql, array($id))->result_array());
-    }
 
+    }
+    public function obtenerCuadroCargoAgente($idAgente) {
+        $sql = 'SELECT * FROM sigep_view_cuadrocargosagentes WHERE idAgente = ? AND vigenteCuadroCargoAgente = 1;';
+        return $this->db->query($sql, array($idAgente))->result_array();
+    }
     public function obtenerCCAAgente($idAgente) {
         $sql = 'SELECT * FROM sigep_view_cuadrocargosagentes WHERE idAgente = ?;';
         return $this->db->query($sql, array($idAgente))->result_array();
     }
 
     public function guardar($aParms) {
-        $sql = 'SELECT sigep_sp_cuadrocargoagente_guardar(?, ?, ?, ?, ?, ?, ?, ?, ?) AS result;';
+        $sql = 'SELECT sigep_sp_cuadrocargoagente_guardar(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) AS result;';
         $result = $this->db->query($sql, $aParms)->result_array();
         return $result[0]['result'];
     }
