@@ -15,34 +15,34 @@
 	</div>
 	<div class="form-group col-lg-12">
     	<label for="nombreEstructura">Area</label>
-    	<input type="text" id="nombreEstructura" name="nombreEstructura" tabindex="3" placeholder="Nombre de Area" value="<?php echo $Reg['nombreEstructura']?>" class="form-control">
+    	<?php echo form_dropdown('idEstructura', $estructuras, $Reg['idEstructura'], 'class="form-control" tabindex="3"');?>
     </div>
 	<div class="form-group col-lg-12">
     	<label for="denominacionCargo">Cargo</label>
-		<input type="text" id="denominacionCargo" name="denominacionCargo" tabindex="4" placeholder="Denominación del Cargo" value="<?php echo $Reg['denominacionCargo']?>" class="form-control">
+		<?php echo form_dropdown('idCargo', $cargos, $Reg['idCargo'], 'class="form-control" tabindex="4"');?>
 	</div>
 	<div class="form-group col-lg-4">
     	<label for="idEscalafon">Escalafon</label>
-		<?php echo form_dropdown('idEscalafon', $escalafones, $Reg['idEscalafon'], 'class="form-control"');?>
+		<?php echo form_dropdown('idEscalafon', $escalafones, $Reg['idEscalafon'], 'class="form-control" tabindex="5"');?>
 	</div>
 	<div class="form-group col-lg-4">
     	<label for="idAgrupamiento">Agrupamiento</label>
-		<?php echo form_dropdown('idAgrupamiento', $agrupamientos, $Reg['idAgrupamiento'], 'class="form-control"');?>
+		<?php echo form_dropdown('idAgrupamiento', $agrupamientos, $Reg['idAgrupamiento'], 'class="form-control" tabindex="6"');?>
 	</div>
 	<div class="form-group col-lg-4">
     	<label for="idFuncion">Función Jerarq.</label>
-		<?php echo form_dropdown('idFuncion', $funciones, $Reg['idFuncion'], 'class="form-control"');?>
+		<?php echo form_dropdown('idFuncion', $funciones, $Reg['idFuncion'], 'class="form-control" tabindex="7"');?>
 	</div>
 	<div class="form-group col-lg-12">
         <label for="my-checkbox">Pertenece al Cuadro de Cargos</label><br>
-        <input type="checkbox" class="form-control" id="perteneceCuadroCargo" name="perteneceCuadroCargo" value="1" <?=($Reg['perteneceCuadroCargo'] == 1)?'checked':''?>>
+        <input type="checkbox" class="form-control" id="perteneceCuadroCargo" name="perteneceCuadroCargo" tabindex="8" value="1" <?=($Reg['perteneceCuadroCargo'] == 1)?'checked':''?>>
     </div>
 	<div class="buttons">
-		<input type="submit" class="btn btn-primary guardar btn-accion<?= (empty($Reg['idCargo'])?' btn-reset':''); ?> pull-right" value="Guardar"/>
+		<input type="submit" class="btn btn-primary guardar btn-accion<?= (empty($Reg['idCargo'])?' btn-reset':''); ?> pull-right" value="Guardar" tabindex="9"/>
 	</div>
 	<input type="hidden" id="idCuadroCargo" name="idCuadroCargo" value="<?php echo $Reg['idCuadroCargo']?>">
-	<input type="hidden" id="idEstructura" name="idEstructura" value="<?php echo $Reg['idEstructura']?>">
-	<input type="hidden" id="idCargo" name="idCargo" value="<?php echo $Reg['idCargo']?>">
+	<!--<input type="hidden" id="idEstructura" name="idEstructura" value="<?php echo $Reg['idEstructura']?>">
+	<input type="hidden" id="idCargo" name="idCargo" value="<?php echo $Reg['idCargo']?>">-->
 	<input type="hidden" id="vcForm" name="vcForm" value="<?= $vcFormName; ?>" />
 </form>
 <script>

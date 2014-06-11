@@ -19,7 +19,7 @@ $vcMainContent = (!empty($vcMainContent))? $vcMainContent: '';
     <title><?= $PanelInfo['titulo'].' - '.$PanelInfo['cliente']; ?></title>
     <meta name="description" content="<?= $PanelInfo['titulo'];?>">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="shortcut icon" href="./assets/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/images/favicon.ico" type="image/x-icon">
     <!--[if lt IE 9]>
     <script type="text/javascript">
         var e = ("abbr,article,aside,audio,canvas,datalist,details,figure,footer,header,hgroup,mark,menu,meter,nav,output,progress,section,time,video").explode(',');
@@ -61,8 +61,7 @@ $vcMainContent = (!empty($vcMainContent))? $vcMainContent: '';
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $this->lib_autenticacion->apellidoPersona().', '.$this->lib_autenticacion->nombrePersona();?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="http://industriasrosobe.com.ar:2084" target="_blank"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;Webmail</a></li>
-                        <li><a href="<?php echo config_item('ext_base_url');?>" target="_blank"><span class="glyphicon glyphicon-globe"></span>&nbsp;&nbsp;Ver mi web</a></li>
+                        <li><a href="http://correo2.salta.gov.ar/webmail/" target="_blank"><span class="glyphicon glyphicon-cog"></span>&nbsp;&nbsp;Webmail</a></li>
                         <li class="divider"></li>
                         <li><a href="aut/logout"><span class="glyphicon glyphicon-off"></span>&nbsp;&nbsp;Cerrar Sesión</a></li>
                     </ul>
@@ -74,20 +73,14 @@ $vcMainContent = (!empty($vcMainContent))? $vcMainContent: '';
     </header>
     <div id="wrapper" class="active">
         <div id="sidebar-wrapper" class="sidebar-holder">
-            <ul class="ubicacion">
-                <li><label>Area:</label> <?=$this->lib_ubicacion->idEstructura().' - '.$this->lib_ubicacion->nombreEstructura();?></li>
-                <li><label>Cargo:</label> <?=$this->lib_ubicacion->idCargo().' - '.$this->lib_ubicacion->denominacionCargo();?></li>
-            </ul>
-            
             <ul id="sidebar_menu" class="sidebar-nav">
                 <li class="sidebar-brand"><a id="menu-toggle" href="#">Menu<span id="main_icon" class="glyphicon glyphicon-align-justify"></span></a></li>
             </ul>
             <ul class="sidebar-nav" id="sidebar">     
-                <li><a href="administrator/agentes">Agentes<span class="sub_icon glyphicon glyphicon-home"></span></a></li>
-                <li><a href="administrator/actuaciones">Actuaciones<span class="sub_icon glyphicon glyphicon-home"></span></a></li>
-                <li><a href="administrator/cuadrocargos">Estructura<span class="sub_icon glyphicon glyphicon-home"></span></a></li>
-                <li><a href="administrator/cuadrocargosagentes">Cargos<span class="sub_icon glyphicon glyphicon-home"></span></a></li>
-                <li><a href="administrator/usuarios">Usuarios<span class="sub_icon glyphicon glyphicon-home"></span></a></li>
+                <li><a href="administrator/agentes">Agentes<span class="sub_icon glyphicon glyphicon-user"></span></a></li>
+                <li><a href="administrator/formaciones">Formacion<span class="sub_icon glyphicon glyphicon-book"></span></a></li>
+                <li><a href="administrator/cuadrocargos">Estructura<span class="sub_icon glyphicon glyphicon-tower"></span></a></li>
+                <li><a href="administrator/cuadrocargosagentes">Cargos<span class="sub_icon glyphicon glyphicon-briefcase"></span></a></li>
                 <li><a href="aut/logout">Cerrar Sesión<span class="sub_icon glyphicon glyphicon-off"></span></a></li>
             </ul>
         </div>
@@ -95,47 +88,18 @@ $vcMainContent = (!empty($vcMainContent))? $vcMainContent: '';
             <div class="page-content inset">
                 <br>
                 <div class="row">
-                    <!--<div class="col-lg-3">
-                        <div class="well pendientes text-center">
-                            <p class="cantidad">30</p>
-                            <p class="referencia">Pendientes de recepción</p>
-                        </div>    
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="well entrantes text-center">
-                            <p class="cantidad">30</p>
-                            <p class="referencia">Actuaciones entrantes hoy</p>
-                        </div>    
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="well salientes text-center">
-                            <p class="cantidad">30</p>
-                            <p class="referencia">Actuaciones salientes hoy</p>
-                        </div>    
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="well totales text-center">
-                            <p class="cantidad">230</p>
-                            <p class="referencia">Actuaciones totales en sistema</p>
-                        </div>    
-                    </div>-->
                     <div class="col-md-12" style="padding-top:5px;">
-                        <!--<ol class="breadcrumb" style="background:none;margin:0px;">
-                            <li><a href="#">Administración</a></li>
-                            <li><a href="#">Productos</a></li>
-                        </ol>-->
                         <?= $vcMainContent; ?>          
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <script type="text/javascript">
+<script type="text/javascript">
     $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $("#wrapper").toggleClass("active");
     });
-    </script>
+</script>
 </body>
 </html>

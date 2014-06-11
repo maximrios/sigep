@@ -19,7 +19,7 @@ $config['ext_base_url_assets_js'] = 'assets/libraries/';
 $config['ext_base_url_assets_css'] = 'assets/css/';
 $config['ext_base_url_assets_images'] = 'assets/images/';
 
-$config['ext_base_panel']['titulo'] = 'Sistema de Administracion de Seguimiento de Actuaciones';
+$config['ext_base_panel']['titulo'] = 'Sistema de Administracion de Recursos Humanos - Si.Ge.P.';
 $config['ext_base_panel']['cliente'] = 'Sindicatura General de la Provincia';
 
 /**

@@ -13,7 +13,7 @@ class Cuadrocargos extends Ext_crud_controller {
         $this->load->model('sigep/cuadros_model', 'cuadro');
         $this->load->model('sigep/cuadrocargos_model', 'cuadrocargo');
         $this->load->model('sigep/estructuras_model', 'estructura');
-        $this->load->model('sigep/cargos_model', 'cargo');
+        $this->load->model('sigep/cargos_model', 'cargos');
         $this->load->model('sigep/instrumentos_model', 'instrumentos');
         $this->load->library('gridview');
         $this->load->library('Messages');
@@ -36,13 +36,13 @@ class Cuadrocargos extends Ext_crud_controller {
             ),
             array(
                 'field' => 'idEstructura',
-                'label' => 'Nombre de area',
-                'rules' => 'trim|xss_clean'
+                'label' => 'Area',
+                'rules' => 'trim|xss_clean|required'
             ),
             array(
                 'field' => 'idCargo',
-                'label' => 'Denominacion del Cargo',
-                'rules' => 'trim|xss_clean'
+                'label' => 'Denominacion de Cargo',
+                'rules' => 'trim|xss_clean|required|is_numeric'
             ),
             array(
                 'field' => 'idEscalafon',
@@ -168,6 +168,8 @@ class Cuadrocargos extends Ext_crud_controller {
         $aData['vcAccion'] = ($this->_reg['idCuadroCargo'] > 0) ? 'Modificar' : 'Agregar';
         $aData['agrupamientos'] = $this->cuadro->dropdownAgrupamientos();
         $aData['escalafones'] = $this->cuadro->dropdownEscalafones();
+        $aData['estructuras'] = $this->estructura->dropdownEstructuras();
+        $aData['cargos'] = $this->cargos->dropdownCargos();
         $aData['funciones'] = $this->cuadro->dropdownFunciones();
         $aData['instrumentos'] = $this->instrumentos->dropdownInstrumentos();
         $this->load->view('administrator/sigep/cuadro/cuadrocargos/formulario', $aData);

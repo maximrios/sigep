@@ -6,6 +6,7 @@
 		'footer_on' => FALSE,
 	);
 	$ci->load->library('hits/pdf', $config);
+	$ci->load->model('hits/formaciones_model', 'formaciones');
 
 	$ci->pdf->SetSubject('TCPDF Tutorial');
 	$ci->pdf->SetKeywords('TCPDF, PDF, example, test, guide');
@@ -31,7 +32,7 @@
 	$ci->pdf->Cell(30, 6, 'Año', 'LTR', 1, 'C', FALSE);
 	$ci->pdf->Cell(160, 6, '', 0, 0, 'C', FALSE);
 	$ci->pdf->SetFont('helvetica', '', 10);
-	$ci->pdf->Cell(50, 6, $agente['nacionalidadPersona'], 'LBR', 0, 'C', FALSE);
+	$ci->pdf->Cell(50, 6, 'Argentina', 'LBR', 0, 'C', FALSE);
 	$ci->pdf->Cell(30, 6, $agente['cuilPersona'], 'LBR', 0, 'C', FALSE);
 	$ci->pdf->Cell(30, 6, date('Y'), 'LBR', 1, 'C', FALSE);
 	$ci->pdf->SetFont('helvetica', '', 14);
@@ -44,8 +45,8 @@
 	$ci->pdf->Cell(30, 6, 'D.N.I. N°', 'LTR', 1, 'C', FALSE);
 	$ci->pdf->Cell(160, 6, '', 0, 0, 'C', FALSE);
 	$ci->pdf->SetFont('helvetica', '', 10);
-	$ci->pdf->Cell(50, 6, $agente['nacimientoPersona'], 'LBR', 0, 'C', FALSE);
-	$ci->pdf->Cell(30, 6, '', 'LBR', 0, 'C', FALSE);
+	$ci->pdf->Cell(50, 6, GetDateFromISO($agente['nacimientoPersona']), 'LBR', 0, 'C', FALSE);
+	$ci->pdf->Cell(30, 6, $agente['nombreEcivil'], 'LBR', 0, 'C', FALSE);
 	$ci->pdf->Cell(30, 6, $agente['dniPersona'], 'LBR', 1, 'C', FALSE);
 	$ci->pdf->SetFont('helvetica', 'B', 10);
 	$ci->pdf->Cell(30, 7, '   Cargo : ', 'LTB', 0, 'L', FALSE);
@@ -88,6 +89,8 @@
 	$ci->pdf->Cell(90, 5, 'DOMICILIO', 1, 0, 'C', FALSE);
 	$ci->pdf->Cell(40, 5, 'Tel / Cel', 1, 0, 'C', FALSE);
 	//$ci->pdf->Cell(40, 5, 'FECHA INGRESO', 1, 0, 'C', FALSE);
+	$formacion = $ci->formaciones->obtenerUnoPersona($agente['idPersona']);
+
 	$ci->pdf->Cell(140, 5, 'TITULO OBTENIDO', 1, 1, 'C', FALSE);
 	$ci->pdf->SetFont('helvetica', '', 10);
 	$ci->pdf->MultiCell(90, 10, $agente['domicilioPersona'], 1, 'C', FALSE, 0, '', '', TRUE, 0, FALSE, TRUE, 10, 'M');
@@ -95,12 +98,12 @@
 	$ci->pdf->Cell(40, 5, $agente['telefonoPersona'], 1, 0, 'C', FALSE);
 	//$ci->pdf->Cell(40, 5, '', 1, 0, 'C', FALSE);
 	//$ci->pdf->Cell(120, 5, '', 1, 1, 'C', FALSE);
-	$ci->pdf->MultiCell(140, 10, ' ', 1, 'C', FALSE, 1, '', '', TRUE, 0, FALSE, TRUE, 10, 'M');
+	$ci->pdf->MultiCell(140, 10, ($formacion == '')? ' ':$formacion['nombreFormacionTitulo'], 1, 'C', FALSE, 1, '', '', TRUE, 0, FALSE, TRUE, 10, 'M');
 	$ci->pdf->Ln(-5);
 	$ci->pdf->Cell(90, 5, '', 0, 0, 'C', FALSE);
-	$ci->pdf->Cell(40, 5, $agente['celularPersona'], 1, 0, 'C', FALSE);
+	$ci->pdf->Cell(40, 5, $agente['celularPersona'], 1, 1, 'C', FALSE);
 	//$ci->pdf->Cell(40, 5, '', 1, 0, 'C', FALSE);
-	$ci->pdf->Cell(140, 5, '', 0, 1, 'C', FALSE);
+	//$ci->pdf->Cell(140, 5, $formacion['nombreFormacionTitulo'], 0, 1, 'C', FALSE);
 
 	/*$ci->pdf->StartTransform();
 	$ci->pdf->Rotate(-90);
@@ -174,61 +177,71 @@
 
 	$meses = array('Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Set', 'Oct', 'Nov', 'Dic');
 	$i = 0;
-	$band = TRUE;
+	$band = FALSE;
+	$pintar = TRUE;
+	$ci->pdf->SetFillColor(225, 225, 225);
 	foreach ($meses as $mes) {
 		$i++;
-		$ci->pdf->MultiCell(10, 8, $mes, 'LTR', 'C', FALSE, 0, '', '', TRUE, 0, FALSE, TRUE, 6, 'M');
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(10, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(10, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(10, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(15, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(17, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(17, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(17, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(17, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(35, 4, '', 1, 1, 'C', FALSE);
-		$ci->pdf->Cell(10, 4, '', 'LBR', 0, 'C', FALSE);	
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(7, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(10, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(10, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(10, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(15, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(17, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(17, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(17, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(17, 4, '', 1, 0, 'C', FALSE);
-		$ci->pdf->Cell(35, 4, '', 1, 1, 'C', FALSE);
+		//$ci->pdf->SetLineWidth(0.5);
+		$ci->pdf->MultiCell(10, 8, $mes, 'LTR', 'C', $band, 0, '', '', TRUE, 0, FALSE, TRUE, 6, 'M');
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(10, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(10, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(10, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(15, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(17, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(17, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(17, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(17, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(35, 5, '', 1, 1, 'C', $band);
+		
+		$ci->pdf->Cell(10, 5, '', 'LBR', 0, 'C', $band);	
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(7, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(10, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(10, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(10, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(15, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(17, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(17, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(17, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(17, 5, '', 1, 0, 'C', $band);
+		$ci->pdf->Cell(35, 5, '', 1, 1, 'C', $band);
+		if($band == FALSE) {
+			$band = TRUE;
+		}
+		else {
+			$band = FALSE;
+		}
 	}
 
 

@@ -48,7 +48,16 @@ class Cargos_model extends CI_Model {
     public function dropdownCargosFiltro() {
         $sql = 'SELECT * FROM sigep_cargos';
         $query = $this->db->query($sql)->result();
-        $funciones[0] = 'Todos';
+        $funciones[0] = 'Seleccione un item...';
+        foreach($query as $row) {
+            $funciones[$row->idCargo] = $row->denominacionCargo; 
+        }
+        return $funciones;
+    }
+    public function dropdownCargos() {
+        $sql = 'SELECT * FROM sigep_cargos';
+        $query = $this->db->query($sql)->result();
+        $funciones[0] = 'Seleccione un item...';
         foreach($query as $row) {
             $funciones[$row->idCargo] = $row->denominacionCargo; 
         }

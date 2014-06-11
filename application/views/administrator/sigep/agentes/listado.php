@@ -9,8 +9,8 @@ $vcGridView = (!empty($vcGridView))? $vcGridView: '';
 $vcNombreList = (!empty($vcNombreList))? $vcNombreList: 'Agentes';
 $vcMsjSrv = (!empty($vcMsjSrv))? $vcMsjSrv: '';
 ?>
-<a href="administrator/agentes/formulario" id="btn-nuevo" class="btn btn-primary btn-accion"><i class="icon-ok icon-white"></i>&nbsp;&nbsp;Agregar Nuevo</a>
-<a href="administrator/agentes/planilla" id="btn-nuevo" class="btn btn-primary" target="_blank"><i class="icon-ok icon-white"></i>&nbsp;&nbsp;Imprimir Planillas</a>
+<a href="administrator/agentes/formulario" id="btn-nuevo" class="btn btn-primary btn-accion"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Agregar Nuevo</a>
+<a href="administrator/agentes/planilla" id="btn-nuevo" class="btn btn-primary" target="_blank"><span class="glyphicon glyphicon-print"></span>&nbsp;&nbsp;Imprimir Planillas</a>
 	<?= $vcMsjSrv; ?>
 	<?= $vcGridView; ?>
 

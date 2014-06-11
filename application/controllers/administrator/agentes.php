@@ -19,6 +19,11 @@ class Agentes extends Ext_crud_Controller {
         $this->_localidades = $this->layout->dropdownLocalidades();*/
         $this->_aReglas = array(
             array(
+                'field' => 'idPersona',
+                'label' => 'Codigo',
+                'rules' => 'trim|xss_clean'
+            )
+            ,array(
                 'field' => 'dniPersona',
                 'label' => 'Numero de documento',
                 'rules' => 'trim|required|max_length[8]|min_length[7]|xss_clean'
@@ -243,7 +248,7 @@ class Agentes extends Ext_crud_Controller {
         //$mensaje = '<a href="administrator/mensajes/formularioUno/{idAgente}" title="Enviar un mensaje a {apellidoPersona} {nombrePersona}" class="icono-llevar mensaje-nuevo" rel="{\'idAgente\': {idAgente}}">&nbsp;</a>';
         if($this->lib_autenticacion->idRol() == 1) {
             $tamano = 64;
-            $acciones = $planilla.$editar;
+            $acciones = $editar.$planilla;
         }
         elseif($this->lib_autenticacion->idRol() == 3) {
             $tamano = 64;

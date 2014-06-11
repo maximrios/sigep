@@ -1,6 +1,11 @@
 /* *
 * Mensajes de notificación
 * */
+#notify-message {
+	margin: 0.5em auto;
+	padding-bottom: 1.2em;
+	clear: both;
+}
 .notif-container-alert{
 width: 100%;
 background: #FFF4CC;

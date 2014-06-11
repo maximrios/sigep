@@ -9,6 +9,6 @@ $vcGridView = (!empty($vcGridView))? $vcGridView: '';
 $vcNombreList = (!empty($vcNombreList))? $vcNombreList: 'Cargos';
 $vcMsjSrv = (!empty($vcMsjSrv))? $vcMsjSrv: '';
 ?>
-<a href="administrator/cuadrocargos/formulario" id="btn-nuevo" class="btn btn-primary btn-accion"><i class="icon-ok icon-white"></i>&nbsp;&nbsp;Agregar Nuevo</a>
+<a href="administrator/cuadrocargos/formulario" id="btn-nuevo" class="btn btn-primary btn-accion"><span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Agregar Nuevo Cargo</a>
 <?= $vcMsjSrv; ?>
 <?= $vcGridView; ?>

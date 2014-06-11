@@ -32,7 +32,8 @@ class Lib_Autenticacion
 		// cargar modelos
 		$this->ci->load->model($this->ci->db->dbdriver.'/lib_autenticacion/usuarios_model');
 		$this->ci->load->model('sigep/agentes_model', 'agentes');
-		$this->ci->load->model('sigep/designaciones_model', 'designaciones');
+		$this->ci->load->model('sigep/cuadrocargosagentes_model', 'cuadrocargosagentes');
+		//$this->ci->load->model('sigep/designaciones_model', 'designaciones');
 		$this->_init();
 	}
 	
@@ -277,7 +278,8 @@ EOT;
 				$rsResult = $rsResult;
 				if(!empty($rsResult['idUsuario'])) {
 					$agente = $this->ci->agentes->obtenerAgentePersona($rsResult['idPersona']);
-					$designacion = $this->ci->designaciones->obtenerDesignacionAgente($agente['idAgente']);
+					//$designacion = $this->ci->designaciones->obtenerDesignacionAgente($agente['idAgente']);
+					$designacion = $this->ci->cuadrocargosagentes->obtenerCCAAgente($agente['idAgente']);
 					$designaciones = $this->ci->lib_ubicacion->_setSessionDesignacion($designacion, $this->ci->lib_ubicacion->_keysDesignacion);
 					$this->unsetSession();			    
 					$this->_setSession($rsResult, $this->_keys);

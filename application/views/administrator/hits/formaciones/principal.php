@@ -8,7 +8,7 @@
 $vcMsjSrv = (!empty($vcMsjSrv))? $vcMsjSrv: ''; 
 ?>
 <div class="panel panel-default">
-	<div class="panel-heading">Administracion de la Estructura de Cargos<a data-toggle="collapse" href="#prueba"><span class="glyphicon glyphicon-minus pull-right"></span></a></div>
+	<div class="panel-heading">Administracion de Formaciones<a data-toggle="collapse" href="#prueba"><span class="glyphicon glyphicon-minus pull-right"></span></a></div>
 		<div class="panel-body panel-collapse">
 			<?= $vcMsjSrv; ?>
  			<div id="contenido-abm" class="container-gridview"></div>
@@ -17,6 +17,6 @@ $vcMsjSrv = (!empty($vcMsjSrv))? $vcMsjSrv: '';
 </div>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#contenido-abm').gridviewHandler({'url': 'administrator/cuadrocargos/listado'});
+		$('#contenido-abm').gridviewHandler({'url': 'administrator/formaciones/listado'});
 	});
 </script>

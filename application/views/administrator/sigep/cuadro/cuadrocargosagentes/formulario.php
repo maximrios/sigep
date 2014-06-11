@@ -40,7 +40,7 @@
   		</div>
 	</div>
 	<div class="form-group col-lg-12">
-    	<label for="nombrePersona">Agente</label>
+    	<label for="idAgente">Agente</label>
         <?php echo form_dropdown('idAgente', $agentes, $Reg['idAgente'], 'class="form-control"');?>
     	<!--<input type="text" id="nombrePersona" name="nombrePersona" tabindex="1" placeholder="Nombre del Agente" value="<?php echo $Reg['nombrePersona']?>" autofocus class="form-control">-->
     </div>
@@ -82,7 +82,6 @@
 	</div>
 	<input type="hidden" id="idCuadroCargo" name="idCuadroCargo" value="<?php echo $Reg['idCuadroCargo']?>">
 	<input type="hidden" id="idCuadroCargoAgente" name="idCuadroCargoAgente" value="<?php echo $Reg['idCuadroCargoAgente']?>">
-	<input type="hidden" id="idAgente" name="idAgente" value="<?php echo $Reg['idAgente']?>">
 	<input type="hidden" id="vcForm" name="vcForm" value="<?= $vcFormName; ?>" />
 </form>
 <script>
